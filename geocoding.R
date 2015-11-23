@@ -56,19 +56,19 @@ geoCode <- function(r, k) {
 
 #Query Maps API
 
-# for(i in 1:1400) {
+# for(i in 1:1800) {
 #     entry <- geoCode(i, keys[1])
 #     df[i, 1] <- entry[1]
 #     df[i, 2] <- entry[2]
 # }
 # 
-# for(i in 1411:2400) {
+# for(i in 1801:3600) {
 #     entry <- geoCode(i, keys[2])
 #     df[i, 1] <- entry[1]
 #     df[i, 2] <- entry[2]
 # }
 # 
-# for(i in 3401:5395) {
+# for(i in 3601:5395) {
 #     entry <- geoCode(i, keys[3])
 #     df[i, 1] <- entry[1]
 #     df[i, 2] <- entry[2]
