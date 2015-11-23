@@ -52,7 +52,7 @@ geoCode <- function(r, k) {
 #create empty data frame and load in API keys. You'll need to provide your own.
 
 # df <- data.frame(lat = rep(NA, nrow(station5.clean)), lng = rep(NA, nrow(station5.clean)))
-# source("./keys.R")
+# source("./data/keys.R")
 
 #Query Maps API
 
