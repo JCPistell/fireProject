@@ -4,10 +4,12 @@ load("./output/geodata2.Rda")
 
 clusterSet <- select(station5.clean.select, lat, lng)
 
-k = 6
-set.seed(11235)
-clusters <- kmeans(x = clusterSet, centers = k)
-
-kmCenters <- clusters$centers
-kmCenters <- as.data.frame(kmCenters)
-kmCenters$clustID <- paste("Cluster", 1:k, sep = " ")
+firecluster <- function(k) {
+	set.seed(11235)
+	clusters <- kmeans(x = clusterSet, centers = k)
+	station5.clean.select$cluster <<- clusters$cluster
+	kmCenters <- clusters$centers
+	kmCenters <- as.data.frame(kmCenters)
+	kmCenters$clustID <- paste("Cluster", 1:k, sep = " ")
+	return(kmCenters)
+}
