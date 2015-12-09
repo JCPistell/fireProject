@@ -5,17 +5,21 @@ library(RColorBrewer)
 #load data
 load("./output/geodata2.Rda")
 source("./clustering.R")
+source("./distanceFunction.R")
 
 #Build Map in leaflet
 firemap <- function(centers, providerTile = "Stamen.Toner") {
     
-    #Create firestation icon
+    #Create icons
     fireIcon <- makeIcon("./data/FireStation.png", 
                          iconWidth = 32, iconHeight = 32, 
                          iconAnchorX = 16, iconAnchorY = 26)
+    targetIcon <- makeIcon("./data/target.png",
+                           iconWidth = 24, iconHeight = 24,
+                           iconAnchorX = 12, iconAnchorY = 12)
     
     #Determine clusters
-    kmCenters <- firecluster(centers)
+    kmCenters <<- firecluster(centers)
     
     #Create color palette
     pal <- c("red", "blue", "green", "orange", "brown", "steelblue", "black", "purple", "yellow", "grey")
@@ -55,6 +59,8 @@ firemap <- function(centers, providerTile = "Stamen.Toner") {
                          group = "Incident Color") %>%
         addMarkers(lng = -104.791636, lat = 39.736827, popup = "Station 5", icon = fireIcon) %>%
         addMarkers(~lng, ~lat, popup = ~clustID, data = kmCenters, group = "Cluster Centers") %>%
+        addMarkers(~lngs, ~lats, data = locs, icon = targetIcon, group = "Possible Locations") %>%
+        addMarkers(lng = -104.7984, lat = 39.73881, popup = "New Location", icon = fireIcon, group = "Best Spot") %>%   #This may need to move
         addLegend(position = "bottomleft", 
                   pal = factpal2, 
                   values = ~cluster,
@@ -68,7 +74,7 @@ firemap <- function(centers, providerTile = "Stamen.Toner") {
                   title = "Incident Type") %>%
         addLayersControl(
             baseGroups = c("Incident Color", "Cluster Color"),
-            overlayGroups = c("Station Location Area", "Cluster Centers"),
+            overlayGroups = c("Station Location Area", "Cluster Centers", "Possible Locations", "Best Spot"),
             options = layersControlOptions(collapsed = FALSE))
     return(m)
 }

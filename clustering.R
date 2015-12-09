@@ -11,5 +11,7 @@ firecluster <- function(k) {
 	kmCenters <- clusters$centers
 	kmCenters <- as.data.frame(kmCenters)
 	kmCenters$clustID <- paste("Cluster", 1:k, sep = " ")
+	kmCenters$size <- clusters$size
+	kmCenters$weight <- sapply(kmCenters$size, function(x) x/sum(kmCenters$size))
 	return(kmCenters)
 }
