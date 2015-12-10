@@ -1,8 +1,6 @@
-load("./output/potentialLocations.Rda")
-load("./output/clusterCenters.Rda")
 
 weighter <- function(row) {
-    cols <- paste("Cluster", 1:6, "Time", sep = "")
+    cols <- paste("Cluster", 1:nrow(kmCenters), "Time", sep = "")
     x <- as.numeric(locs[row, cols])
     w <- kmCenters$weight
     weightedtime <- weighted.mean(x, w)
@@ -11,3 +9,6 @@ weighter <- function(row) {
 
 wvec <- sapply(1:nrow(locs), function(x) weighter(x))
 locs$weightedtimes <- wvec
+
+locs <- arrange(locs, weightedtimes)
+save(locs, file = "./output/potentialLocations.Rda")

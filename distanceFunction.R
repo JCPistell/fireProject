@@ -1,14 +1,10 @@
 library(RCurl)
 library(jsonlite)
 
-# lng1 <- -104.810313
-# lat1 <- 39.759473
-# lng2 <- -104.788854
-# lat2 <- 39.732902
-# lngs <- seq(lng1, lng2, length.out = 10)
-# lats <- seq(lat1, lat2, length.out = 10)
-# locs <- expand.grid(lats, lngs)
-# names(locs) <- c("lats", "lngs")
+lngs <- seq(lng1, lng2, length.out = 10)
+lats <- seq(lat1, lat2, length.out = 10)
+locs <- expand.grid(lats, lngs)
+names(locs) <- c("lats", "lngs")
 
 disturl <- function(origin, destination, return.call = "json", sensor = "false", 
                     key = "AIzaSyBtFK60px7x9f-8iXidik6SO9v9rXl9X-M") {
@@ -43,9 +39,3 @@ colMaker <- function(cluster) {
     print(paste("Done with Cluster ", cluster, "!", sep = ""))
     return(vals)
 }
-
-# for(i in 1:6) {
-#     colMaker(i)
-# }
-
-#save(locs, file = "./output/potentialLocations.Rda")

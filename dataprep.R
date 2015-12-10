@@ -1,5 +1,4 @@
-#source api functions and load leaflet
-source("/home/jcpistell/Classes/Fall/AnalyticsLabs/finalProject/geocoding.R")
+library(dplyr)
 
 #Select relevant data from dataframe
 station5.clean.select <-  select(station5.clean, IncidentNumber, 

@@ -1,6 +1,4 @@
 library(dplyr)
-setwd("~/Classes/Fall/AnalyticsLabs/finalProject")
-load("./output/geodata2.Rda")
 
 clusterSet <- select(station5.clean.select, lat, lng)
 
