@@ -6,8 +6,9 @@ lats <- seq(lat1, lat2, length.out = 10)
 locs <- expand.grid(lats, lngs)
 names(locs) <- c("lats", "lngs")
 
-disturl <- function(origin, destination, return.call = "json", sensor = "false", 
-                    key = "AIzaSyBtFK60px7x9f-8iXidik6SO9v9rXl9X-M") {
+source("./data/keys.R")
+
+disturl <- function(origin, destination, return.call = "json", sensor = "false", key = keys[1]) {
     root <- "https://maps.googleapis.com/maps/api/distancematrix/"
     k <- paste(root, return.call, 
                "?origins=", paste(origin, collapse = ","), 
@@ -20,7 +21,7 @@ disturl <- function(origin, destination, return.call = "json", sensor = "false",
 distFunc <- function(row, cluster) {
     origin <- paste(locs[row, ]$lats, locs[row, ]$lngs, sep = ",")
     destination <- paste(kmCenters[cluster, ]$lat, kmCenters[cluster, ]$lng, sep = ",")
-    durl <- disturl(origin, destination)
+    durl <- disturl(origin, destination, )
     doc <- getURL(durl)
     x <- fromJSON(doc)
     elements <- unlist(x$rows$elements)
