@@ -17,7 +17,7 @@ if(!"geodata.Rda" %in% outputfiles) {
 }
 
 source("./clustering.R")
-kmCenters <- firecluster(6)
+kmCenters <- firecluster(clusterNumber)
 
 if(!"potentialLocations.Rda" %in% outputfiles) {
     source("./distanceFunction.R")
@@ -27,7 +27,10 @@ if(!"potentialLocations.Rda" %in% outputfiles) {
     load("./output/potentialLocations.Rda")
 }
 
+source("./integeroptimization.R")
+
 bestspot <- slice(locs, 1)
+optimizedspot <- slice(locs, optimized.loc)
 
 source("./leafletmap.R")
-map <- firemap(6)
+map <- firemap(clusterNumber)

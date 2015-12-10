@@ -3,7 +3,7 @@ library(leaflet)
 library(RColorBrewer)
 
 #Build Map in leaflet
-firemap <- function(centers, providerTile = "Stamen.Toner") {
+firemap <- function(centers, providerTile = "OpenStreetMap.BlackAndWhite") {
     
     #Create icons
     fireIcon <- makeIcon("./data/FireStation.png", 
@@ -52,7 +52,8 @@ firemap <- function(centers, providerTile = "Stamen.Toner") {
         addMarkers(lng = -104.791636, lat = 39.736827, popup = "Station 5", icon = fireIcon) %>%
         addMarkers(~lng, ~lat, popup = ~clustID, data = kmCenters, group = "Cluster Centers") %>%
         addMarkers(~lngs, ~lats, data = locs, icon = targetIcon, group = "Possible Locations") %>%
-        addMarkers(~lngs, ~lats, data = bestspot, popup = "New Location", icon = fireIcon, group = "Best Spot") %>%   #This may need to move
+        addMarkers(~lngs, ~lats, data = bestspot, popup = "Best Avg Response", icon = fireIcon, group = "Best Spot") %>%
+        addMarkers(~lngs, ~lats, data = optimizedspot, popup = "Optimized Response", icon = fireIcon, group = "Best Spot") %>%
         addLegend(position = "bottomleft", 
                   pal = factpal2, 
                   values = ~cluster,
