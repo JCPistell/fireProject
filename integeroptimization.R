@@ -1,5 +1,6 @@
 library(lpSolve)
 library(dplyr)
+
 constMatrix <- select(locs, ends_with("Time"))
 constMatrix$build <- 1
 constMatrix <- as.matrix(constMatrix)
