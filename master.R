@@ -29,8 +29,8 @@ if(!"potentialLocations.Rda" %in% outputfiles) {
 
 source("./integeroptimization.R")
 
-bestspot <- slice(locs, 1)
-optimizedspot <- slice(locs, optimized.loc)
+bestspot <- slice(locs, 1) %>% select(lats, lngs, ends_with("Time"), weightedtimes)
+optimizedspot <- slice(locs, optimized.loc) %>% select(lats, lngs, ends_with("Time"), weightedtimes)
 
 source("./leafletmap.R")
 map <- firemap(clusterNumber)

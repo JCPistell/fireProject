@@ -52,8 +52,16 @@ firemap <- function(centers, providerTile = "OpenStreetMap.BlackAndWhite") {
         addMarkers(lng = -104.791636, lat = 39.736827, popup = "Station 5", icon = fireIcon) %>%
         addMarkers(~lng, ~lat, popup = ~clustID, data = kmCenters, group = "Cluster Centers") %>%
         addMarkers(~lngs, ~lats, data = locs, icon = targetIcon, group = "Possible Locations") %>%
-        addMarkers(~lngs, ~lats, data = bestspot, popup = "Best Avg Response", icon = fireIcon, group = "Best Spot") %>%
-        addMarkers(~lngs, ~lats, data = optimizedspot, popup = "Optimized Response", icon = fireIcon, group = "Best Spot") %>%
+        addMarkers(~lngs, ~lats, data = bestspot, 
+                   popup = ~paste("Best Avg Response", "<br>",
+                                  "Avg Resp. Time: ", round(weightedtimes, 2), "<br>", 
+                                  "Max Resp. Time: ", round(max(unlist(bestspot)), 2), sep = ""), 
+                   icon = fireIcon, group = "Best Spot") %>%
+        addMarkers(~lngs, ~lats, data = optimizedspot, 
+                   popup = ~paste("Optimized Response", "<br>",
+                                  "Avg Resp Time: ", round(weightedtimes, 2), "<br>",
+                                  "Max Resp Time: ", round(max(unlist(optimizedspot)), 2), sep = ""), 
+                   icon = fireIcon, group = "Best Spot") %>%
         addLegend(position = "bottomleft", 
                   pal = factpal2, 
                   values = ~cluster,
