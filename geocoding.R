@@ -29,7 +29,7 @@ geoCode <- function(r, k) {
 
 ###################################################################################
 #
-# This next section does a shitload of API queries. Use at your own risk.
+# This next section does a lot of API queries. Use at your own risk.
 # Note: You'll need to provide your own API key
 #
 ###################################################################################
