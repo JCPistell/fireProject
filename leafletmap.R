@@ -3,7 +3,7 @@ library(leaflet)
 library(RColorBrewer)
 
 #Build Map in leaflet
-firemap <- function(centers, providerTile = "OpenStreetMap.BlackAndWhite") {
+firemap <- function(centers, providerTile = "Stamen.Toner") {
     
     #Create icons
     fireIcon <- makeIcon("./data/FireStation.png", 
@@ -55,12 +55,16 @@ firemap <- function(centers, providerTile = "OpenStreetMap.BlackAndWhite") {
         addMarkers(~lngs, ~lats, data = bestspot, 
                    popup = ~paste("Best Avg Response", "<br>",
                                   "Avg Resp. Time: ", round(weightedtimes, 2), "<br>", 
-                                  "Max Resp. Time: ", round(max(unlist(bestspot)), 2), sep = ""), 
+                                  "Max Resp. Time: ", round(max(unlist(bestspot)), 2), "<br>",
+                                  "Lat: ", lats, "<br>", 
+                                  "Lng: ", lngs, sep = ""), 
                    icon = fireIcon, group = "Best Spot") %>%
         addMarkers(~lngs, ~lats, data = optimizedspot, 
                    popup = ~paste("Optimized Response", "<br>",
                                   "Avg Resp Time: ", round(weightedtimes, 2), "<br>",
-                                  "Max Resp Time: ", round(max(unlist(optimizedspot)), 2), sep = ""), 
+                                  "Max Resp Time: ", round(max(unlist(optimizedspot)), 2), "<br>",
+                                  "Lat: ", lats, "<br>", 
+                                  "Lng: ", lngs, sep = ""), 
                    icon = fireIcon, group = "Best Spot") %>%
         addLegend(position = "bottomleft", 
                   pal = factpal2, 
